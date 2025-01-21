@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+
+<script>
+fetch("clanky.xml")
+  .then((response) => response.text())
+  .then((text) => {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(text, "text/xml");
+
+   //console.log(xmlDoc.firstChild);
+   //console.log(xmlDoc.firstChild.nodeValue);
+
+const datumPole = xmlDoc.getElementsByTagName('datum');
+const titulPole = xmlDoc.getElementsByTagName('titul');
+const autorPole = xmlDoc.getElementsByTagName('autor');
+const zdrojPole = xmlDoc.getElementsByTagName('zdroj');
+
+	const datum = datumPole[0].textContent;
+	const titul = titulPole[0].textContent;
+ 
+    console.log(`${datum} - ${titul}`);
+
+	const autor = autorPole[0].textContent;
+	const zdroj = zdrojPole[0].textContent;
+    console.log(`autor:${autor}`);
+    console.log(`zdroj:${zdroj}`);
+
+
+
+const para = document.createElement("p");
+
+
+
+const lNodes = xmlDoc.getElementsByTagName('text');
+
+for (let i = 0; i < lNodes.length; i++) {
+    const paragraf= lNodes[i].getElementsByTagName('paragraf')[0].textContent;
+    const rozbal= lNodes[i].getElementsByTagName('rozbal')[0].textContent;
+    console.log(`Name: ${paragraf}, Type: ${rozbal}`);
+	para.innerText = paragraf;
+		document.body.appendChild(para);
+
+}
+
+
+
+//htmlObj.find("#box").html();
+
+});
+</script>
+</HEAD>
+<BODY>
+<h1>The Document Object</h1>
+<h2>The createElement() Method</h2>
+
+<p>Create a p element with some text:</p>
+
+
+
+</BODY>
+</HTML>
